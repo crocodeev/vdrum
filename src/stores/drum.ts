@@ -23,7 +23,8 @@ export const useDrumStore = defineStore('drumStore', {
                 [false, false, false, false],
                 [false, false, false, false]
             ],
-            currentBeatNumber: null
+            currentBeatNumber: null,
+            tempo: 120
         }
     },
     getters: {
@@ -38,6 +39,10 @@ export const useDrumStore = defineStore('drumStore', {
         setCurrentBeat(beatNumber: number){
             this.currentBeatNumber = beatNumber
             
+        },
+        setTempo(value: number){
+            const mapped_tempo = Math.floor((value - 1) * (200 - 60) / (100 - 1) + 60);
+            this.tempo = mapped_tempo;   
         }
     }
 })

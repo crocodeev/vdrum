@@ -17,6 +17,7 @@
     "pinia": "^2.0.32",
     "postcss-preset-env": "^8.0.1",
     "vue": "^3.2.47",
+    "vue-material-design-icons": "^5.2.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
