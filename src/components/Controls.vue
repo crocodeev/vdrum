@@ -22,7 +22,7 @@
 </script>
 
 <template>
-    <div>
+    <div class="controls">
         <StartButton @click="play()"/>
         <StopButton @click="stop()"/>
     </div>

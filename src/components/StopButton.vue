@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <button>STOP</button>
+    <button class="btn">STOP</button>
 </template>

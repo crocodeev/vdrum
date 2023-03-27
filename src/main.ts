@@ -1,12 +1,12 @@
 import { createApp } from "vue";
 import { useDrumStore } from "./stores/drum";
 import { createPinia } from "pinia";
-import PadFieldVue from "./components/PadField.vue";
 import './assets/main.css';
+import HomeView from "./views/HomeView.vue";
 import SoundEngine from "./audio/soundEngine";
 
 const pinia = createPinia();
-const app = createApp(PadFieldVue);
+const app = createApp(HomeView);
 
 app.use(pinia);
 

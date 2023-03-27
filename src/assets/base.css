@@ -2,7 +2,9 @@
 :root {
 
   --drum-background: #282828;
-  --pad-background: #ffccd7;
+  --drum-background-second: #222222;
+  --drum-background-third: #575757;
+  --drum-font: #ffffff;
 
   --pad-xs-size: 5px;
   --pad-sm-size: 10px;
@@ -97,17 +99,32 @@ body {
 
   background: var(--drum-background);
   justify-content: center;
-  /*min-height: 100vh;
-  color: var(--color-text);
-  background: var(--drum-background);
-  transition: color 0.5s, background-color 0.5s;
-  line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;*/
+}
+
+.header{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  font-family: fantasy;
+  height: 3em;
+  padding-left: 1em;
+  background: var(--drum-background-second);
+  color: var(--drum-font);
+  /*box-shadow:  30px 30px 59px #222222,
+             -30px -30px 59px #383838;*/
+}
+
+.controls{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  font-family: fantasy;
+  height: 3em;
+  padding-left: 1em;
+  background: var(--drum-background-second);
+  color: var(--drum-font);
+  /*box-shadow:  30px 30px 59px #222222,
+             -30px -30px 59px #383838;*/
 }
 
 .pad_container {
@@ -125,4 +142,14 @@ body {
   border-radius: 10%;
   aspect-ratio: 1/1;
   margin: 2px;
+}
+
+.btn {
+  margin-right: 1em;
+  border-radius: 20px;
+  background: #222222;
+  justify-content: center;
+  box-shadow:  5px 5px 10px #1b1b1b,
+              -5px -5px 10px #292929;
+  color: var(--drum-font);
 }

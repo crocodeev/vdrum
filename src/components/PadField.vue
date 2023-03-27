@@ -1,7 +1,6 @@
 <script lang="ts">
 
     import Pad from "./Pad.vue";
-    import Controls from "./Controls.vue";
     import { useDrumStore } from "@/stores/drum";
 
     export default {
@@ -15,8 +14,7 @@
             }
         },
         components: {
-            Pad,
-            Controls
+            Pad
         },
         computed: {
             colStyles(){
@@ -54,6 +52,5 @@
             :isCurrent="isCurrent(colIndex)"/>
         </div>
     </div>
-    <Controls />
 </template>
 

@@ -1,9 +1,13 @@
 <script setup lang="ts">
-  import TheWelcome from '../components/TheWelcome.vue'
+  import Header from "@/components/Header.vue";
+  import PadField from "@/components/PadField.vue";
+  import Controls from "@/components/Controls.vue";
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <Header />
+    <PadField />
+    <Controls />
   </main>
 </template>
