@@ -98,6 +98,7 @@ html {
 body {
 
   background: var(--drum-background);
+  display: flexbox;
   justify-content: center;
 }
 

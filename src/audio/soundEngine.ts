@@ -35,7 +35,7 @@ class SoundEngine {
         this._nextNoteTime = 0
         this._current16thNote = 0
         this._ac = Howler.ctx
-        this._scheduleAheadTime = 0.1
+        this._scheduleAheadTime = 0
         this._isPlaying = false
         this._timerID = null
 
@@ -63,7 +63,7 @@ class SoundEngine {
 
         this._timerID = setInterval(() => {
             this.scheduler()
-        }, 100)
+        }, 10)
 
 
     }
@@ -71,13 +71,14 @@ class SoundEngine {
     scheduler() {
         
         while (this._nextNoteTime < this._ac.currentTime + this._scheduleAheadTime ) {
+            console.log("sched");
             this.playBeat(this._current16thNote);
             this.nextNote();
         }
     }
 
 
-    playBeat( beatNumber: number) {
+    playBeat( beatNumber: number) { 
         const currentPattern = this._pattern[beatNumber]
 
         currentPattern[0] && this._bd.play()
@@ -91,7 +92,9 @@ class SoundEngine {
 
     stop(){
         this._timerID && clearInterval(this._timerID)
+        this._nextNoteTime = 0
         this._isPlaying = false
+        
     }
 
     nextNote(){
