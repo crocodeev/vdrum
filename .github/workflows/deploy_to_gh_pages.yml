@@ -1,4 +1,4 @@
-name: deploy vdrum to gitpages
+name: deploy_to_gh_pages
 
 on:
   push:
