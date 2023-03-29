@@ -21,6 +21,8 @@ class SoundEngine {
     private _scheduleAheadTime: number
     private _isPlaying: boolean
     private _timerID: NodeJS.Timer | null
+    private _noteTime: number
+    private _startTime: number
 
 
     private constructor() {
@@ -32,12 +34,15 @@ class SoundEngine {
         this._tempo = 120
         this._pattern
         this._currentBeat = () => undefined
+        this._startTime = 0
+        this._noteTime = 0 // note length
         this._nextNoteTime = 0
         this._current16thNote = 0
         this._ac = Howler.ctx
-        this._scheduleAheadTime = 0
+        this._scheduleAheadTime = 0.2
         this._isPlaying = false
         this._timerID = null
+        
 
     }
 
@@ -58,27 +63,36 @@ class SoundEngine {
         }
 
         this._isPlaying = true
+        //reset note time
+        this._noteTime = 0
         this._current16thNote = 0
-        this._nextNoteTime = this._ac.currentTime
-
-        this._timerID = setInterval(() => {
-            this.scheduler()
-        }, 10)
-
-
+        
+        //offset for js main execution time 
+        this._startTime = this._ac.currentTime + 0.005
+        
+        this.scheduler()
     }
 
     scheduler() {
         
-        while (this._nextNoteTime < this._ac.currentTime + this._scheduleAheadTime ) {
-            console.log("sched");
+        let currentTime = this._ac.currentTime
+        currentTime -= this._startTime
+        
+        while (this._noteTime < currentTime + this._scheduleAheadTime ) {
+    
+            console.log(this._current16thNote);
+            
             this.playBeat(this._current16thNote);
             this.nextNote();
+
         }
+
+        this._timerID = setTimeout(() => this.scheduler(), 5)
     }
 
 
     playBeat( beatNumber: number) { 
+        
         const currentPattern = this._pattern[beatNumber]
 
         currentPattern[0] && this._bd.play()
@@ -91,8 +105,7 @@ class SoundEngine {
     }
 
     stop(){
-        this._timerID && clearInterval(this._timerID)
-        this._nextNoteTime = 0
+        this._timerID && clearInterval(this._timerID)  
         this._isPlaying = false
         
     }
@@ -100,12 +113,14 @@ class SoundEngine {
     nextNote(){
 
         const secondsPerBeat = 60/this._tempo
-        this._nextNoteTime += 0.25 * secondsPerBeat
+        
         this._current16thNote++
 
         if(this._current16thNote == 16){
             this._current16thNote = 0
         }
+
+        this._noteTime += 0.25 * secondsPerBeat
 
     }
 
