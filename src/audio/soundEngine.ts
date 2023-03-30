@@ -20,7 +20,7 @@ class SoundEngine {
     private _ac: any
     private _scheduleAheadTime: number
     private _isPlaying: boolean
-    private _timerID: NodeJS.Timer | null
+    private _timerID: any
     private _noteTime: number
     private _startTime: number
 
@@ -39,7 +39,7 @@ class SoundEngine {
         this._nextNoteTime = 0
         this._current16thNote = 0
         this._ac = Howler.ctx
-        this._scheduleAheadTime = 0.2
+        this._scheduleAheadTime = 0.02
         this._isPlaying = false
         this._timerID = null
         
@@ -68,9 +68,9 @@ class SoundEngine {
         this._current16thNote = 0
         
         //offset for js main execution time 
-        this._startTime = this._ac.currentTime + 0.005
+        this._startTime = this._ac.currentTime
         
-        this.scheduler()
+        this._timerID = requestAnimationFrame(() => this.scheduler())
     }
 
     scheduler() {
@@ -87,7 +87,8 @@ class SoundEngine {
 
         }
 
-        this._timerID = setTimeout(() => this.scheduler(), 5)
+        //this._timerID = setTimeout(() => this.scheduler(), 5)
+        this._timerID = requestAnimationFrame(() => this.scheduler())
     }
 
 
@@ -104,12 +105,6 @@ class SoundEngine {
     
     }
 
-    stop(){
-        this._timerID && clearInterval(this._timerID)  
-        this._isPlaying = false
-        
-    }
-
     nextNote(){
 
         const secondsPerBeat = 60/this._tempo
@@ -122,6 +117,13 @@ class SoundEngine {
 
         this._noteTime += 0.25 * secondsPerBeat
 
+    }
+
+    stop(){
+        //this._timerID && clearInterval(this._timerID)
+        this._timerID && cancelAnimationFrame(this._timerID)    
+        this._isPlaying = false
+        
     }
 
     set store(store: any){
